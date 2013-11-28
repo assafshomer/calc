@@ -100,5 +100,10 @@ module BtcBlockSurvival
 		1
 	end	
 
+	def attackers_reward(q)
+		return (3*q**2-2*q**3)/(1-q) if q<0.5
+		q/(1-q)
+	end		
+
 
 end

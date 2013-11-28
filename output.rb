@@ -165,7 +165,7 @@ module BtcController
 
 	def plot_new_block_survival(q_min=0, granularity=20,filename)
 		q_array=prepare_parray(q_min,granularity)
-		header=['q','Honest','Withholding']
+		header=['q','Honest - q','Withholding - P(q)']
 		result=[]
 		CSV.open(path_prefix+filename+".csv", "wb", col_sep: "	") do |csv|		
 			csv << header
@@ -177,7 +177,24 @@ module BtcController
 				result=[]
 			end
 		end		
-	end		
+	end	
+
+
+	def plot_attackers_reward(q_min=0,q_max=1, granularity=20,filename)
+		q_array=prepare_qarray(q_min,q_max,granularity)
+		header=['q','Honest - q','Withholding - R(q)']
+		result=[]
+		CSV.open(path_prefix+filename+".csv", "wb", col_sep: "	") do |csv|		
+			csv << header
+			q_array.each do |q|
+				result << q
+				result << q
+				result << attackers_reward(q) unless attackers_reward(q)>5
+				csv << result
+				result=[]
+			end
+		end		
+	end				
 
 end
 

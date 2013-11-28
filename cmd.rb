@@ -26,11 +26,12 @@ include BtcBlockSurvival
 # calculate_block_survival(c,p,n)
 # p calculate_block_survival(1,0.7,3)
 # p calculate_chain_replace(0.9,100)
-
+# p prepare_qarray(0.2,0.9)
 # check_full_normalization(m_max,c,p,n)
 # p check_full_normalization(50,200,0.9,20)
 # p find_stable_solution(0.6)
 # plot_block_survival(n_min=0,n_max=10,p_min=0.5, granularity=5,filename)
 # plot_block_survival(0,50,0.5,100,'blocksurvive')
 plot_new_block_survival(0,50,'newblocksurvive')
+plot_attackers_reward(0,1,200,'attackersreward')
 # p choose(3,2.5)

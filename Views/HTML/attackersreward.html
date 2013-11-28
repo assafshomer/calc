@@ -73,7 +73,7 @@ var svg = d3.select("body").append("svg")
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-d3.tsv("./CSV/newblocksurvive.csv", function(error, data) {
+d3.tsv("./CSV/attackersreward.csv", function(error, data) {
   color.domain(d3.keys(data[0]).filter(function(key) { return key !== "q"; })); // change label 
 
   // data.forEach(function(d) {
@@ -105,7 +105,7 @@ d3.tsv("./CSV/newblocksurvive.csv", function(error, data) {
       .style("text-anchor", "end")
       .attr("font-size","3em")
       .attr("opacity",0.2)
-      .text("Attackers Share  q");      
+      .text("Attackers Share q");      
 
   svg.append("g")
       .attr("class", "y axis")
@@ -118,7 +118,7 @@ d3.tsv("./CSV/newblocksurvive.csv", function(error, data) {
       .style("text-anchor", "end")
       .attr("font-size","3em")
       .attr("opacity",0.2)
-      .text("Probability");
+      .text("Reward");
 
     // svg.selectAll("text.title").data([1]).enter().append("text")
     // .attr("font-size","3em")
@@ -133,7 +133,7 @@ d3.tsv("./CSV/newblocksurvive.csv", function(error, data) {
     .style("font-family",'sans-serif')
     // .style("font-weight","bold")
     // .style("text-decoration", "italic")  
-    .text("Block production probability");
+    .text("Attacker's expected reward");
 
   var city = svg.selectAll(".city")
       .data(cities)
