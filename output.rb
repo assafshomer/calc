@@ -165,7 +165,7 @@ module BtcController
 
 	def plot_new_block_survival(q_min=0, granularity=20,filename)
 		q_array=prepare_parray(q_min,granularity)
-		header=['q','Honest - q','Withholding - P(q)']
+		header=['q','Honest - q','Withholding - Q(q)']
 		result=[]
 		CSV.open(path_prefix+filename+".csv", "wb", col_sep: "	") do |csv|		
 			csv << header

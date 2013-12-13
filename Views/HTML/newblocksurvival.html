@@ -113,12 +113,12 @@ d3.tsv("./CSV/newblocksurvive.csv", function(error, data) {
     .append("text")
       .attr("transform", "rotate(-90)")
       .attr("y", -35)
-      .attr("x",-height/5)
+      .attr("x",-height/10)
       // .attr("dy", "5em")
       .style("text-anchor", "end")
       .attr("font-size","3em")
       .attr("opacity",0.2)
-      .text("Probability");
+      .text("Probability of Success");
 
     // svg.selectAll("text.title").data([1]).enter().append("text")
     // .attr("font-size","3em")
@@ -133,7 +133,7 @@ d3.tsv("./CSV/newblocksurvive.csv", function(error, data) {
     .style("font-family",'sans-serif')
     // .style("font-weight","bold")
     // .style("text-decoration", "italic")  
-    .text("Block production probability");
+    .text("Block-withholding attack");
 
   var city = svg.selectAll(".city")
       .data(cities)
