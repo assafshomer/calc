@@ -32,6 +32,12 @@ include BtcBlockSurvival
 # p find_stable_solution(0.6)
 # plot_block_survival(n_min=0,n_max=10,p_min=0.5, granularity=5,filename)
 # plot_block_survival(0,50,0.5,100,'blocksurvive')
-plot_new_block_survival(0,50,'newblocksurvive')
-plot_attackers_reward(0,1,200,'attackersreward')
+# plot_new_block_survival(0,50,'newblocksurvive')
+# plot_attackers_reward(0,1,200,'attackersreward')
 # p choose(3,2.5)
+# p prepare_header(1,10,'n')
+# p prepare_qarray(0,1,20)
+# p prepare_parray
+plot_gamma_attack(0,1,0,0.5,20,5,'gammaattack')
+# plot_q_critical(0,0.5,20,'qcritical')
+

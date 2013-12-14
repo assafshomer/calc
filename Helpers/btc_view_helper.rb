@@ -1,5 +1,5 @@
 module BtcViewHelper
-	def prepare_parray(p_min,granularity)
+	def prepare_parray(p_min=0.5,granularity=10)
 		p_array=[]
 		(0..granularity).each {|x| p_array<<p_min+x.fdiv((1/(1-p_min))*granularity)}
 		result=p_array.map {|x| x.round(5)}
