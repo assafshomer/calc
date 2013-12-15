@@ -113,6 +113,10 @@ module BtcBlockSurvival
 		(1-2*g)/(2-2*g)
 	end
 
+	def q_benefit(g)
+		(1-3*g)/(3-3*g) 
+	end
+
 	def gamma_attack(q,g)
 		if q<q_crit(g) && g<0.5
 			return (2*q*q_eff(q,g))/(1-q_eff(q,g))	

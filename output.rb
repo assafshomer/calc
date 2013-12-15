@@ -212,6 +212,21 @@ module BtcController
 	end	
 
 
+	def plot_q_benefit(g_min=0,g_max=1, granularity=20,filename)
+		g_array=prepare_qarray(g_min,g_max,granularity)
+		header=['q', 'q_benefit=(1-3ɣ)/(3-3ɣ)']
+		result=[]
+		CSV.open(path_prefix+filename+".csv", "wb", col_sep: "	") do |csv|		
+			csv << header
+			g_array.each do |g|
+				result << g
+				result << q_benefit(g) unless q_benefit(g)<0
+				csv << result 
+				result=[]
+			end
+		end		
+	end	
+
 
 	def plot_gamma_attack(q_min=0,q_max=1,g_min=0,g_max=0.5, p_gran=20,q_gran=20,filename)
 		q_array=prepare_qarray(q_min,q_max,p_gran)
