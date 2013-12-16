@@ -38,7 +38,7 @@ include BtcBlockSurvival
 # p prepare_header(1,10,'n')
 # p prepare_qarray(0,1,20)
 # p prepare_parray
-plot_gamma_attack(0,0.5,0.05,0.06,50,1,'gammaattackfocus')
+plot_gamma_attack(0,1,0,0.5,50,5,'gammaattack')
 # plot_q_critical(0,0.5,20,'qcritical')
 # plot_q_benefit(0,0.4,400,'qcritandbenefit')
 

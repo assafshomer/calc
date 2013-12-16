@@ -104,7 +104,7 @@ d3.tsv("./CSV/gammaattack.csv", function(error, data) {
     .attr("transform", "translate(" + 2/3*width + "," + 50 + ")")
       .style("text-anchor", "end")
       .attr("font-size","3em")
-      .attr("opacity",0.2)
+      .attr("opacity",0.4)
       .text("Attackers Share q");      
 
   svg.append("g")
@@ -117,7 +117,7 @@ d3.tsv("./CSV/gammaattack.csv", function(error, data) {
       // .attr("dy", "5em")
       .style("text-anchor", "end")
       .attr("font-size","3em")
-      .attr("opacity",0.2)
+      .attr("opacity",0.4)
       .text("Probability of success");
 
     // svg.selectAll("text.title").data([1]).enter().append("text")
@@ -133,7 +133,7 @@ d3.tsv("./CSV/gammaattack.csv", function(error, data) {
     .style("font-family",'sans-serif')
     // .style("font-weight","bold")
     // .style("text-decoration", "italic")  
-    .text("Block withholding attack (Type II)");
+    .text("Block withholding attack (Type 0)");
 
   var city = svg.selectAll(".city")
       .data(cities)
@@ -157,7 +157,7 @@ d3.tsv("./CSV/gammaattack.csv", function(error, data) {
   legend = svg.append("g")
     .attr("class","legend")
     .attr("transform","translate("+(50)+",30)")
-    .style("font-size","10px")
+    .style("font-size","14px")
     .call(d3.legend)
 
 });

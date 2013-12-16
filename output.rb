@@ -231,7 +231,7 @@ module BtcController
 	def plot_gamma_attack(q_min=0,q_max=1,g_min=0,g_max=0.5, p_gran=20,q_gran=20,filename)
 		q_array=prepare_qarray(q_min,q_max,p_gran)
 		g_array=prepare_qarray(g_min,g_max,q_gran)
-		header=['q','Honest - q','Withholding - Q(q)']
+		header=['q','Honest','Type I']
 		g_array.each {|g| header << 'ɣ='+g.to_s}
 		result=[]
 		CSV.open(path_prefix+filename+".csv", "wb", col_sep: "	") do |csv|		
