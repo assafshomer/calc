@@ -114,8 +114,13 @@ module BtcBlockSurvival
 	end
 
 	def q_benefit(g)
-		(1-3*g)/(3-3*g) 
+		return (1-3*g)/(3-3*g) if g<0.33
+		0
 	end
+
+	def q_selfish(g)
+		(1-g)/(3-2*g) 
+	end	
 
 	def q_0
 		1-(1/Math.sqrt(2))

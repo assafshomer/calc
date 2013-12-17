@@ -45,4 +45,5 @@ include BtcBlockSurvival
 # p q_plus(0.059)
 # p gamma_crit
 # p q_benefit(gamma_crit)
-plot_q_g_phase_space(0,1,1000,'gqphase')
+# plot_q_g_phase_space(0,1,1000,'gqphase')
+plot_q_selfish(0,0.5,100,'qselfish')

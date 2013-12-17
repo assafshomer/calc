@@ -214,7 +214,7 @@ module BtcController
 
 	def plot_q_benefit(g_min=0,g_max=1, granularity=20,filename)
 		g_array=prepare_qarray(g_min,g_max,granularity)
-		header=['q', 'q_benefit=(1-3ɣ)/(3-3ɣ)']
+		header=['q', 'q_b=(1-3ɣ)/(3-3ɣ)']
 		result=[]
 		CSV.open(path_prefix+filename+".csv", "wb", col_sep: "	") do |csv|		
 			csv << header
@@ -227,6 +227,23 @@ module BtcController
 		end		
 	end	
 
+	def plot_q_selfish(g_min=0,g_max=1, granularity=20,filename)
+		g_array=prepare_qarray(g_min,g_max,granularity)
+		header=['q', 'q_b=(1-3ɣ)/(3-3ɣ)','q_s=(1-ɣ)/(3-2ɣ)']
+		result=[]
+		CSV.open(path_prefix+filename+".csv", "wb", col_sep: "	") do |csv|		
+			csv << header
+			g_array.each do |g|
+				result << g
+				result << q_benefit(g)
+				# result << q_crit(g)
+				result << q_selfish(g)
+				csv << result 
+				result=[]
+			end
+		end		
+	end		
+# 'q_c=(1-2ɣ)/(2-2ɣ)',
 
 	def plot_gamma_attack(q_min=0,q_max=1,g_min=0,g_max=0.5, p_gran=20,q_gran=20,filename)
 		q_array=prepare_qarray(q_min,q_max,p_gran)
@@ -271,7 +288,7 @@ module BtcController
 
 	def plot_q_g_phase_space(g_min=0,g_max=1, granularity=20,filename)
 		g_array=prepare_qarray(g_min,g_max,granularity)
-		header=['q','q_0','q_+=1/4+√(1-17ɣ)(16-16ɣ)','q_=(1-3ɣ)/(3-3ɣ)']
+		header=['q','q_0','q_+=1/4+√(1-17ɣ)(16-16ɣ)','q_b=(1-3ɣ)/(3-3ɣ)']
 		result=[]
 		CSV.open(path_prefix+filename+".csv", "wb", col_sep: "	") do |csv|		
 			csv << header
