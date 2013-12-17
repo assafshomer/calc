@@ -249,6 +249,44 @@ module BtcController
 		end		
 	end		
 
+	def plot_gamma_focus(q_min=0,q_max=1,g_min=0.05,g_max=0.06, p_gran=20,q_gran=2,filename)
+		q_array=prepare_qarray(q_min,q_max,p_gran)
+		g_array=prepare_qarray(g_min,g_max,q_gran)
+		header=['q','Type I']
+		g_array.each {|g| header << 'ɣ='+g.to_s}
+		result=[]
+		CSV.open(path_prefix+filename+".csv", "wb", col_sep: "	") do |csv|		
+			csv << header
+			q_array.each do |q|
+				result << q
+				result << new_chain_survival(q)
+				g_array.each do |g|
+					result << gamma_attack(q,g) 
+				end
+				csv << result
+				result=[]
+			end
+		end		
+	end	
+
+	def plot_q_g_phase_space(g_min=0,g_max=1, granularity=20,filename)
+		g_array=prepare_qarray(g_min,g_max,granularity)
+		header=['q','q_0','q_+=1/4+√(1-17ɣ)(16-16ɣ)','q_=(1-3ɣ)/(3-3ɣ)']
+		result=[]
+		CSV.open(path_prefix+filename+".csv", "wb", col_sep: "	") do |csv|		
+			csv << header
+			g_array.each do |g|
+				result << g
+				result << q_0 unless g>0.058
+				result << q_plus(g) unless g>0.058
+				# result << q_minus(g) unless g>1/17.0
+				result << q_benefit(g) unless q_benefit(g)<0 || g<0.058
+				csv << result 
+				result=[]
+			end
+		end		
+	end		
+
 end
 
 

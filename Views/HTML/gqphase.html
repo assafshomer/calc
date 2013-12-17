@@ -41,8 +41,8 @@ body {
 <script>
 
 var margin = {top: 100, right: 150, bottom: 100, left: 100},
-    width = 900 - margin.left - margin.right,
-    height = 900 - margin.top - margin.bottom;
+    width = 800 - margin.left - margin.right,
+    height = 600 - margin.top - margin.bottom;
 
 // var parseDate = d3.time.format("%Y%m%d").parse;
 
@@ -73,7 +73,7 @@ var svg = d3.select("body").append("svg")
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-d3.tsv("./CSV/gammaattackfocus.csv", function(error, data) {
+d3.tsv("./CSV/gqphase.csv", function(error, data) {
   color.domain(d3.keys(data[0]).filter(function(key) { return key !== "q"; })); // change label 
 
   // data.forEach(function(d) {
@@ -93,7 +93,8 @@ d3.tsv("./CSV/gammaattackfocus.csv", function(error, data) {
 
   y.domain([
     d3.min(cities, function(c) { return d3.min(c.values, function(v) { return v.probability; }); }),
-    d3.max(cities, function(c) { return d3.max(c.values, function(v) { return v.probability; }); })
+    1
+    // d3.max(cities, function(c) { return d3.max(c.values, function(v) { return v.probability; }); })+0.1
   ]);
 
   svg.append("g")
@@ -101,11 +102,11 @@ d3.tsv("./CSV/gammaattackfocus.csv", function(error, data) {
       .attr("transform", "translate(0," + height + ")")
       .call(xAxis)
     .append("text")
-    .attr("transform", "translate(" + 2/3*width + "," + 50 + ")")
+    .attr("transform", "translate(" + 1/2*width + "," + 50 + ")")
       .style("text-anchor", "end")
-      .attr("font-size","3em")
-      .attr("opacity",0.2)
-      .text("Attackers Share q");      
+      .attr("font-size","5em")
+      .attr("opacity",0.5)
+      .text("ɣ");      
 
   svg.append("g")
       .attr("class", "y axis")
@@ -113,12 +114,12 @@ d3.tsv("./CSV/gammaattackfocus.csv", function(error, data) {
     .append("text")
       .attr("transform", "rotate(-90)")
       .attr("y", -35)
-      .attr("x",-height/9)
+      .attr("x",-height/3)
       // .attr("dy", "5em")
       .style("text-anchor", "end")
-      .attr("font-size","3em")
-      .attr("opacity",0.2)
-      .text("Probability of success");
+      .attr("font-size","5em")
+      .attr("opacity",0.5)
+      .text("q");
 
     // svg.selectAll("text.title").data([1]).enter().append("text")
     // .attr("font-size","3em")
@@ -133,7 +134,7 @@ d3.tsv("./CSV/gammaattackfocus.csv", function(error, data) {
     .style("font-family",'sans-serif')
     // .style("font-weight","bold")
     // .style("text-decoration", "italic")  
-    .text("Block withholding attack (Type II)");
+    .text("The [q,ɣ] phase space");
 
   var city = svg.selectAll(".city")
       .data(cities)
@@ -143,6 +144,7 @@ d3.tsv("./CSV/gammaattackfocus.csv", function(error, data) {
   city.append("path")
       .attr("class", "line")
       .attr("d", function(d) { return line(d.values); })
+      .attr("id", function(d,i) {return i;})
       .attr("data-legend",function(d) { return d.name})
       .attr("title", function(d) {return d.name})
       .style("stroke", function(d) { return color(d.name); });
@@ -156,8 +158,8 @@ d3.tsv("./CSV/gammaattackfocus.csv", function(error, data) {
 
   legend = svg.append("g")
     .attr("class","legend")
-    .attr("transform","translate("+(50)+",30)")
-    .style("font-size","10px")
+    .attr("transform","translate("+(150)+",30)")
+    .style("font-size","15px")
     .call(d3.legend)
 
 });
