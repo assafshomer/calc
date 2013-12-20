@@ -304,6 +304,25 @@ module BtcController
 		end		
 	end		
 
+	def phase_space_focus(g_min=0,g_max=0.06, granularity=20,filename)
+		g_array=prepare_qarray(g_min,g_max,granularity)
+		header=['q','q_0','q_+=1/4+√(1-17ɣ)(16-16ɣ)','q_b=(1-3ɣ)/(3-3ɣ)']
+		result=[]
+		CSV.open(path_prefix+filename+".csv", "wb", col_sep: "	") do |csv|		
+			csv << header
+			g_array.each do |g|
+				result << g
+				result << q_0 
+				result << q_plus(g) unless g>1/17.0
+				result << q_minus(g) unless g>1/17.0
+				result << q_benefit(g) unless q_benefit(g)<0 || g<0.058
+				csv << result 
+				result=[]
+			end
+		end		
+	end		
+
+
 end
 
 
