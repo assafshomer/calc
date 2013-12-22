@@ -49,12 +49,13 @@ module BtcController
 	def comparison_tsv(z=1,p_min=0.5, granularity=5,filename)
 		p_array=prepare_parray(p_min,granularity)
 		suffix= ' (z='+z.to_s+')'
-		header=['p', 'satoshi'+suffix, 'meni'+suffix,'assaf'+suffix]
+		header=['p','assaf_(n-m)'+suffix ,'satoshi'+suffix, 'meni'+suffix,'assaf'+suffix]
 		result=[]
 		CSV.open(path_prefix+filename+".csv", "wb", col_sep: "	") do |csv|		
 			csv << header
 			p_array.each do |p|
 				result << p
+				result << assaf_n_m(z,p)
 				result << satoshi(z,p)
 				result << meni(z,p)
 				result << assaf(z,p)

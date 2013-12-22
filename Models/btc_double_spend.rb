@@ -20,6 +20,15 @@ module BtcDoubleSpend
 		return 1-m_array.inject(:+)
 	end
 
+	def assaf_n_m(n,p) 
+		return 1 if n==0
+		m_array=[]
+		(0..n).each do |m|
+			m_array << choose(n+m-1,m) * (p**n * (1-p)**m - p**(m-1) * (1-p)**(n+1))
+		end
+		return 1-m_array.inject(:+)
+	end
+
 	def assaf_ds_prefix(n,p)
 		return 0 if p==1 # basically with q=0 th attack cannot even start
 		(1-p)**2 / (1-p**n * (1+n*(1-p)))

@@ -5,7 +5,7 @@ include BtcDoubleSpend
 include BtcBlockSurvival
 
 # p probability_tsv(1,10,0.5,25,'assaf')
-# comparison_tsv(6,0.5,10,'compare')
+comparison_tsv(1,0.5,10,'compare')
 # confirmations_tsv(0.001,0.8,20,'confirmations')
 # p confirmations(0.001,0.7,200,'satoshi')
 # p prepare_parray(0.8,10)
@@ -32,7 +32,7 @@ include BtcBlockSurvival
 # p find_stable_solution(0.6)
 # plot_block_survival(n_min=0,n_max=10,p_min=0.5, granularity=5,filename)
 # plot_block_survival(0,50,0.5,100,'blocksurvive')
-plot_new_block_survival(0,50,'newblocksurvive')
+# plot_new_block_survival(0,50,'newblocksurvive')
 # plot_attackers_reward(0,1,200,'attackersreward')
 # p choose(3,2.5)
 # p prepare_header(1,10,'n')
