@@ -5,7 +5,7 @@ include BtcDoubleSpend
 include BtcBlockSurvival
 
 # p probability_tsv(1,10,0.5,25,'assaf')
-comparison_tsv(1,0.5,10,'compare')
+# comparison_tsv(1,0,20,'compare')
 # confirmations_tsv(0.001,0.8,20,'confirmations')
 # p confirmations(0.001,0.7,200,'satoshi')
 # p prepare_parray(0.8,10)
@@ -38,9 +38,9 @@ comparison_tsv(1,0.5,10,'compare')
 # p prepare_header(1,10,'n')
 # p prepare_qarray(0,1,20)
 # p prepare_qarray(0,1,0)
-# plot_gamma_attack(0,1,0,0.5,50,5,'gammaattack')
+plot_gamma_attack(0,1,0,0.5,50,5,'gammaattack')
 # plot_gamma_focus(0,0.5,0.055,0.06,50,0,'gammaattackfocus')
-# plot_q_critical(0,0.5,20,'qcritical')
+# plot_q_critical(0,1,2000,'qcritical')
 # plot_q_benefit(0,0.4,400,'qcritandbenefit')
 # p q_plus(0.059)
 # p gamma_crit

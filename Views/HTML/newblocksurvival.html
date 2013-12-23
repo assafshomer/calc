@@ -101,11 +101,11 @@ d3.tsv("./CSV/newblocksurvive.csv", function(error, data) {
       .attr("transform", "translate(0," + height + ")")
       .call(xAxis)
     .append("text")
-    .attr("transform", "translate(" + 2/3*width + "," + 50 + ")")
+    .attr("transform", "translate(" + (3/4)*width + "," + 50 + ")")
       .style("text-anchor", "end")
       .attr("font-size","2em")
       .attr("opacity",0.5)
-      .text("Attackers Share  q");      
+      .text("Miner's relative hashing power  q");      
 
   svg.append("g")
       .attr("class", "y axis")
@@ -118,7 +118,7 @@ d3.tsv("./CSV/newblocksurvive.csv", function(error, data) {
       .style("text-anchor", "end")
       .attr("font-size","2em")
       .attr("opacity",0.5)
-      .text("Probability of Success Q(q)");
+      .text("Probability of Success P(q)");
 
     // svg.selectAll("text.title").data([1]).enter().append("text")
     // .attr("font-size","3em")
@@ -129,7 +129,7 @@ d3.tsv("./CSV/newblocksurvive.csv", function(error, data) {
     .attr("x", (width / 2))             
     .attr("y", 0 - (margin.top / 2))
     .attr("text-anchor", "middle")  
-    .style("font-size", "2em") 
+    .style("font-size", "3em") 
     .style("font-family",'sans-serif')
     // .style("font-weight","bold")
     // .style("text-decoration", "italic")  

@@ -199,13 +199,13 @@ module BtcController
 
 	def plot_q_critical(g_min=0,g_max=1, granularity=20,filename)
 		g_array=prepare_qarray(g_min,g_max,granularity)
-		header=['q', 'q_c=(1-2ɣ)/(2-2ɣ)']
+		header=['q','q_c(ɣ)']
 		result=[]
 		CSV.open(path_prefix+filename+".csv", "wb", col_sep: "	") do |csv|		
 			csv << header
 			g_array.each do |g|
 				result << g
-				result << q_crit(g) 
+				result << q_crit(g) unless q_crit(g)<0
 				csv << result
 				result=[]
 			end
@@ -249,8 +249,8 @@ module BtcController
 	def plot_gamma_attack(q_min=0,q_max=1,g_min=0,g_max=0.5, p_gran=20,q_gran=20,filename)
 		q_array=prepare_qarray(q_min,q_max,p_gran)
 		g_array=prepare_qarray(g_min,g_max,q_gran)
-		header=['q','Honest','Type I']
-		g_array.each {|g| header << 'ɣ='+g.to_s}
+		header=['q','Standard: P=q','Type I: P=Q(q)']
+		g_array.each {|g| header << 'Type 0: P=S(ɣ,q) with ɣ='+g.to_s}
 		result=[]
 		CSV.open(path_prefix+filename+".csv", "wb", col_sep: "	") do |csv|		
 			csv << header

@@ -101,11 +101,11 @@ d3.tsv("./CSV/gammaattack.csv", function(error, data) {
       .attr("transform", "translate(0," + height + ")")
       .call(xAxis)
     .append("text")
-    .attr("transform", "translate(" + 2/3*width + "," + 50 + ")")
+    .attr("transform", "translate(" + (3/4)*width + "," + 50 + ")")
       .style("text-anchor", "end")
-      .attr("font-size","3em")
-      .attr("opacity",0.4)
-      .text("Attackers Share q");      
+      .attr("font-size","2em")
+      .attr("opacity",0.5)
+      .text("Miner's relative hashing power q");      
 
   svg.append("g")
       .attr("class", "y axis")
@@ -116,9 +116,9 @@ d3.tsv("./CSV/gammaattack.csv", function(error, data) {
       .attr("x",-height/9)
       // .attr("dy", "5em")
       .style("text-anchor", "end")
-      .attr("font-size","3em")
-      .attr("opacity",0.4)
-      .text("Probability of success");
+      .attr("font-size","2em")
+      .attr("opacity",0.5)
+      .text("Probability of success P(ɣ,q)");
 
     // svg.selectAll("text.title").data([1]).enter().append("text")
     // .attr("font-size","3em")
@@ -133,7 +133,7 @@ d3.tsv("./CSV/gammaattack.csv", function(error, data) {
     .style("font-family",'sans-serif')
     // .style("font-weight","bold")
     // .style("text-decoration", "italic")  
-    .text("Block withholding attack (Type 0)");
+    .text("Probability of success for Type 0 Strategy");
 
   var city = svg.selectAll(".city")
       .data(cities)
@@ -156,8 +156,8 @@ d3.tsv("./CSV/gammaattack.csv", function(error, data) {
 
   legend = svg.append("g")
     .attr("class","legend")
-    .attr("transform","translate("+(50)+",30)")
-    .style("font-size","14px")
+    .attr("transform","translate("+(280)+",240)")
+    .style("font-size","1.8em")
     .call(d3.legend)
 
 });
