@@ -1,21 +1,21 @@
 module BtcDoubleSpend
-	def gamma(z,p)
-		z*(1-p)/p if p>0 and p<=1 and z.class== Fixnum and z>=0
+	def gamma(z,q)
+		z*q/(1-q) if q>=0 and q<1 and z.class== Fixnum and z>=0
 	end
 
-	def satoshi(z,p) # z is the number of confirmations and p is the honest hashrate
+	def satoshi(z,q) # z is the number of confirmations and p is the honest hashrate
 		k_array=[]
 		(0..z).each do |k|
-			k_array<<(gamma(z,p)**k)*(Math.exp(-gamma(z,p))/fact(k))*(1-((1-p)/p)**(z-k))
+			k_array<<(gamma(z,q)**k)*(Math.exp(-gamma(z,q))/fact(k))*(1-(q/(1-q))**(z-k))
 		end
 		return 1-k_array.inject(:+)
 	end
 
-	def meni(n,p) # n is the number of confirmations and p is the honest hashrate
+	def meni(n,q) # n is the number of confirmations and p is the honest hashrate
 		return 1 if n==0
 		m_array=[]
 		(0..n).each do |m|
-			m_array << choose(n+m-1,m) * (p**n * (1-p)**m - p**m * (1-p)**n)
+			m_array << choose(n+m-1,m) * ((1-q)**n * q**m - (1-q)**m * q**n)
 		end
 		return 1-m_array.inject(:+)
 	end

@@ -12,10 +12,11 @@ module BtcController
 		"./Views/HTML/CSV/"
 	end
 
-	def current_calculation(z,p)
-		# satoshi(z,p)
-		# meni(z,p)
-		assaf(z,p)
+	def current_calculation(z,q)
+		satoshi(z,q)
+		# meni(z,q)
+		# assaf(z,q)
+		# assaf_n_m(z,q)
 	end		
 
 	def show(z_max=10)
@@ -29,36 +30,85 @@ module BtcController
 		end		
 	end
 
-	def probability_tsv(z_min=0,z_max=10,p_min=0.5, granularity=5,filename)
-		p_array=prepare_parray(p_min,granularity)
-		header=prepare_header(z_min,z_max)
+	def probability_tsv(z_min=1,z_max=10,q_min=0,q_max=0.5, granularity=5,filename,round)
+		q_array=prepare_qarray(q_min,q_max,granularity)
+		header=prepare_header(z_min,z_max,'z')
 		result=[]
 		CSV.open(path_prefix+filename+".csv", "wb", col_sep: "	") do |csv|		
 			csv << header
-			p_array.each do |p|
-				result << p
+			q_array.each do |q|
+				result << q
 				(z_min..z_max).each do |z|
-					result << current_calculation(z,p)
+					result << current_calculation(z,q).round(round)
 				end
 				csv << result
 				result=[]
 			end
 		end		
 	end
-
-	def comparison_tsv(z=1,p_min=0.5, granularity=5,filename)
-		p_array=prepare_parray(p_min,granularity)
-		suffix= ' (z='+z.to_s+')'
-		header=['p','assaf_(n-m)'+suffix ,'satoshi'+suffix, 'meni'+suffix,'assaf'+suffix]
+	def satoshi_tsv(z_min=1,z_max=10,q_min=0,q_max=0.5, granularity=5,filename,round)
+		q_array=prepare_qarray(q_min,q_max,granularity)
+		header=prepare_header(z_min,z_max,'z')
 		result=[]
 		CSV.open(path_prefix+filename+".csv", "wb", col_sep: "	") do |csv|		
 			csv << header
-			p_array.each do |p|
-				result << p
-				result << assaf_n_m(z,p)
-				result << satoshi(z,p)
-				result << meni(z,p)
-				result << assaf(z,p)
+			q_array.each do |q|
+				result << (q*100).round.to_s+'%'
+				(z_min..z_max).each do |z|
+					result << (satoshi(z,q)*100).round(3).to_s+'%'
+				end
+				csv << result
+				result=[]
+			end
+		end		
+	end
+	def meni_tsv(z_min=1,z_max=10,q_min=0,q_max=0.5, granularity=5,filename,round)
+		q_array=prepare_qarray(q_min,q_max,granularity)
+		header=prepare_header(z_min,z_max,'z')
+		result=[]
+		CSV.open(path_prefix+filename+".csv", "wb", col_sep: "	") do |csv|		
+			csv << header
+			q_array.each do |q|
+				result << (q*100).round.to_s+'%'
+				(z_min..z_max).each do |z|
+					result << (meni(z,q)*100).round(3).to_s+'%'
+				end
+				csv << result
+				result=[]
+			end
+		end		
+	end
+	def assaf_tsv(z_min=1,z_max=10,q_min=0,q_max=0.5, granularity=5,filename,round)
+		q_array=prepare_qarray(q_min,q_max,granularity)
+		header=prepare_header(z_min,z_max,'z')
+		result=[]
+		CSV.open(path_prefix+filename+".csv", "wb", col_sep: "	") do |csv|		
+			csv << header
+			q_array.each do |q|
+				result << (q*100).round.to_s+'%'
+				(z_min..z_max).each do |z|
+					result << (assaf_n_m(z,q)*100).round(3).to_s+'%'
+				end
+				csv << result
+				result=[]
+			end
+		end		
+	end			
+
+	def comparison_tsv(z=1,q_min=0,q_max=0.5, granularity=5,filename,round)
+		q_array=prepare_qarray(q_min,q_max,granularity)
+		suffix= ' (z='+z.to_s+')'
+		header=['q','assaf'+suffix, 'satoshi'+suffix,'meni'+suffix]
+		# header=['q','satoshi'+suffix, 'meni'+suffix]
+		result=[]
+		CSV.open(path_prefix+filename+".csv", "wb", col_sep: "	") do |csv|		
+			csv << header
+			q_array.each do |q|
+				result << q
+				result << assaf_n_m(z,q).round(round)
+				result << satoshi(z,q).round(round)
+				result << meni(z,q).round(round)
+				# result << assaf(z,q)
 				csv << result
 				result=[]
 			end
