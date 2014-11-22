@@ -375,20 +375,28 @@ module BtcController
 		end		
 	end
 
-	def plot_duration(x=[0,1,10],z=[1,6],a=12,filename='duration',epsilon=0.01)
+	def plot_duration(x=[0,1,10],z=[1,6],a=[10,12],filename='duration',epsilon=0.01)
 		x_array=prepare_xarray(x[0],x[1],x[2],epsilon)
 		p x_array
 		z_array=(z[0]..z[1]).to_a
-		p z_array		
+		p z_array
+		if a.min == a.max then a_array=a.uniq else a_array=(a[0]..a[1]).to_a end
+		p a_array
 		header=['x']
-		z_array.each {|z| header << 'z='+z.to_s+', a='+a.to_s}
+		z_array.each do |zz|
+			a_array.each do |aa|
+				header << 'z='+zz.to_s+', a='+aa.to_s
+			end
+		end
 		result=[]
-		CSV.open(path_prefix+filename+"_a=#{a}"+".csv", "wb", col_sep: "	") do |csv|		
+		CSV.open(path_prefix+filename+".csv", "wb", col_sep: "	") do |csv|		
 			csv << header
-			x_array.each do |x|
-				result << x											
-				z_array.each do |z|
-					result << durationx(x,z,a).round(2)					
+			x_array.each do |xx|
+				result << xx
+				z_array.each do |zz|
+					a_array.each do |aa|
+						result << durationx(xx,zz,aa).round(2)
+					end
 				end
 				csv << result
 				result=[]

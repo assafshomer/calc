@@ -118,7 +118,7 @@ d3.tsv("./CSV/duration.csv", function(error, data) {
       .style("text-anchor", "end")
       .attr("font-size","3em")
       .attr("opacity",0.2)
-      .text("Duration (a=12)");
+      .text("Duration");
 
     // svg.selectAll("text.title").data([1]).enter().append("text")
     // .attr("font-size","3em")
@@ -156,7 +156,7 @@ d3.tsv("./CSV/duration.csv", function(error, data) {
 
   legend = svg.append("g")
     .attr("class","legend")
-    .attr("transform","translate("+(50)+",30)")
+    .attr("transform","translate("+(500)+",30)")
     .style("font-size","10px")
     .call(d3.legend)
 
