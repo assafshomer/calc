@@ -4,10 +4,12 @@ include BtcController
 include BtcDoubleSpend
 include BtcBlockSurvival
 
-p satoshi_tsv(1,10,0,0.5,25,'satoshi',7)
-p meni_tsv(1,10,0,0.5,25,'meni',7)
-p assaf_tsv(1,10,0,0.5,25,'assaf',7)
-comparison_tsv(6,0,0.5,20,'compare',5)
+plot_duration([0,0.9,20],[1,6],12,'duration')
+
+# p satoshi_tsv(1,10,0,0.5,25,'satoshi',7)
+# p meni_tsv(1,10,0,0.5,25,'meni',7)
+# p assaf_tsv(1,10,0,0.5,25,'assaf',7)
+# comparison_tsv(6,0,0.5,20,'compare',5)
 # confirmations_tsv(0.001,0.8,20,'confirmations')
 # p confirmations(0.001,0.7,200,'satoshi')
 # p prepare_parray(0.8,10)

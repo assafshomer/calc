@@ -5,8 +5,10 @@ module BtcController
 	require './Helpers/btc_view_helper.rb'
 	require './Models/btc_double_spend.rb'
 	require './Models/btc_block_survival.rb'
+	require './Models/btc_duration.rb'
 
 	include BtcViewHelper
+	include BtcDuration
 
 	def path_prefix
 		"./Views/HTML/CSV/"
@@ -371,8 +373,28 @@ module BtcController
 				result=[]
 			end
 		end		
-	end		
+	end
 
+	def plot_duration(x=[0,1,10],z=[1,6],a=12,filename='duration')
+		x_array=prepare_qarray(x[0],x[1],x[2])
+		p x_array
+		z_array=(z[0]..z[1]).to_a
+		p z_array		
+		header=['x']
+		z_array.each {|z| header << 'z='+z.to_s}
+		result=[]
+		CSV.open(path_prefix+filename+".csv", "wb", col_sep: "	") do |csv|		
+			csv << header
+			x_array.each do |x|
+				result << x											
+				z_array.each do |z|
+					result << durationx(x,z,a).round(2)					
+				end
+				csv << result
+				result=[]
+			end
+		end		
+	end
 
 end
 

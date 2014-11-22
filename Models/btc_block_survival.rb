@@ -148,7 +148,7 @@ module BtcBlockSurvival
 		else
 			return 1
 		end
-	end	
+	end
 
 	def strength(x)
 		Math.sqrt(x**2 + q_benefit(x)**2)
