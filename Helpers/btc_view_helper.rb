@@ -14,6 +14,16 @@ module BtcViewHelper
 		return q_array.map {|x| x.round(5)}
 	end
 
+	def prepare_xarray(x_min=0,x_max=1,steps=10, epsilon = 0.01)
+		return [x_min] if steps<1
+		x_array=[]
+		(0..steps).each do |x|
+			tmp = x_min+x.fdiv((1/(x_max.to_f-x_min.to_f))*steps)
+			x_array << tmp unless (1-tmp).abs < epsilon
+		end
+		return x_array.map {|x| x.round(5)}
+	end
+
 	def prepare_header(min=0,max=10, label='p')
 		header=[label]
 		(min..max).each {|z| header << label+'='+z.to_s }

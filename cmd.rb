@@ -4,7 +4,7 @@ include BtcController
 include BtcDoubleSpend
 include BtcBlockSurvival
 
-plot_duration([0,0.9,20],[1,6],12,'duration')
+plot_duration([0,4,100],[1,6],12,'duration',0.01)
 
 # p satoshi_tsv(1,10,0,0.5,25,'satoshi',7)
 # p meni_tsv(1,10,0,0.5,25,'meni',7)

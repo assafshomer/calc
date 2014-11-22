@@ -375,15 +375,15 @@ module BtcController
 		end		
 	end
 
-	def plot_duration(x=[0,1,10],z=[1,6],a=12,filename='duration')
-		x_array=prepare_qarray(x[0],x[1],x[2])
+	def plot_duration(x=[0,1,10],z=[1,6],a=12,filename='duration',epsilon=0.01)
+		x_array=prepare_xarray(x[0],x[1],x[2],epsilon)
 		p x_array
 		z_array=(z[0]..z[1]).to_a
 		p z_array		
 		header=['x']
-		z_array.each {|z| header << 'z='+z.to_s}
+		z_array.each {|z| header << 'z='+z.to_s+', a='+a.to_s}
 		result=[]
-		CSV.open(path_prefix+filename+".csv", "wb", col_sep: "	") do |csv|		
+		CSV.open(path_prefix+filename+"_a=#{a}"+".csv", "wb", col_sep: "	") do |csv|		
 			csv << header
 			x_array.each do |x|
 				result << x											
